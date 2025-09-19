@@ -33,15 +33,19 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Install dependencies
-      run: npm install
+    - name: Install backend dependencies
+      run: |
+        cd backend
+        npm install
 
-    - name: Run tests
-      run: npm test
+    - name: Install frontend dependencies
+      run: |
+        cd frontend
+        npm install
+
+    - name: Run backend tests
+      run: |
+        cd backend
+        npm test
       env:
-        DB_NAME: postgres
-        DB_USER: postgres
-        DB_PASSWORD: postgres
-        DB_HOST: localhost
-        DB_PORT: 5432
-        PORT: 3000
+        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
